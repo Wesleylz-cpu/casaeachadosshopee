@@ -21,8 +21,10 @@
 <p class="text-sm mt-1">Melhores achados da Shopee com desconto 🔥</p>
 </header>
 
-<!-- LOGIN ADMIN -->
-<section id="loginAdmin" class="max-w-md mx-auto px-4 mt-6">
+
+<!-- LOGIN ADMIN (AGORA OCULTO) -->
+<section id="loginAdmin"
+class="max-w-md mx-auto px-4 mt-6 hidden">
 
 <div class="bg-white rounded-2xl shadow p-6 text-center">
 
@@ -43,6 +45,7 @@ Entrar
 </div>
 
 </section>
+
 
 <!-- ADMIN PANEL -->
 <section id="adminPanel"
@@ -79,11 +82,13 @@ Adicionar Produto
 
 </section>
 
+
 <!-- PRODUTOS -->
 <main id="produtos"
 class="max-w-5xl mx-auto px-4 py-8 grid md:grid-cols-3 gap-6">
 
 </main>
+
 
 <footer class="bg-black text-white text-center py-4 text-sm">
 
@@ -91,10 +96,12 @@ class="max-w-5xl mx-auto px-4 py-8 grid md:grid-cols-3 gap-6">
 
 </footer>
 
+
 <script>
 
 // SENHA ADMIN
 const SENHA_ADMIN = "Lezinho1579@";
+
 
 // FIREBASE CONFIG
 const firebaseConfig = {
@@ -106,14 +113,29 @@ messagingSenderId: "288736027823",
 appId: "1:288736027823:web:d2e6e208efb345f7af605a"
 };
 
+
 // iniciar firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
+
 
 // ELEMENTOS
 const produtosContainer = document.getElementById("produtos");
 const loginAdmin = document.getElementById("loginAdmin");
 const adminPanel = document.getElementById("adminPanel");
+
+
+// ATALHO SECRETO PARA MOSTRAR LOGIN ADMIN
+document.addEventListener("keydown", function(e){
+
+if(e.ctrlKey && e.altKey && e.key.toLowerCase()==="a"){
+
+loginAdmin.classList.toggle("hidden");
+
+}
+
+});
+
 
 // LOGIN ADMIN
 function verificarSenha(){
@@ -122,8 +144,8 @@ const senha = document.getElementById("senha").value;
 
 if(senha === SENHA_ADMIN){
 
-loginAdmin.style.display="none";
-adminPanel.style.display="block";
+loginAdmin.classList.add("hidden");
+adminPanel.classList.remove("hidden");
 
 }else{
 
@@ -132,6 +154,7 @@ alert("Senha incorreta");
 }
 
 }
+
 
 // LISTAR PRODUTOS ONLINE
 function renderProdutos(){
@@ -184,6 +207,7 @@ Abrir na Shopee 🛒
 
 }
 
+
 // ADICIONAR PRODUTO ONLINE
 function addProduto(){
 
@@ -213,6 +237,7 @@ alert("Produto publicado online 🚀");
 
 }
 
+
 // ABRIR APP SHOPEE
 function abrirShopee(link){
 
@@ -240,6 +265,7 @@ window.open(link,"_blank");
 }
 
 }
+
 
 // carregar produtos
 renderProdutos();
